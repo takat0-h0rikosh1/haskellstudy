@@ -59,7 +59,7 @@ in your PATH!
 cabal: unrecognised command: new-update (try --help)
 
 # bash: export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
-$ set -x set -x PATH $HOME/.cabal/bin/ $HOME/.ghcup/bin $PATH
+$ set -x PATH $HOME/.cabal/bin/ $HOME/.ghcup/bin $PATH
 ```
 
 ## Install Stack
