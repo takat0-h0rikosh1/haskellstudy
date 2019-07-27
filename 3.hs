@@ -110,3 +110,36 @@ greet :: String -> String
 greet "Juan" = niceGreeting ++ "Juan!"
 greet "Fernando" = niceGreeting ++ " Fernando!"
 greet name = badGreeting ++ " " ++ name
+
+bmiTell5 :: Double -> Double -> String
+bmiTell5 weight height
+    |  bmi <= skinny = "underweight"
+    |  bmi <= normal = "normal"
+    |  bmi <= fat    = "fat"
+    |  otherwise = "whale"
+    where bmi = weight / height ^ 2
+          (skinny, normal, fat)  = (18.5, 25.5, 30.0)
+
+initials :: String -> String -> String
+initials firstname lastname = [f] ++ ". " ++ [l] ++ ". "
+    where (f:_) = firstname
+          (l:_) = lastname
+
+calcBmi :: [ (Double, Double) ] -> [Double]
+calcBmi xs =  [bmi w h | (w, h) <- xs]
+    where bmi weight height = weight / height ^ 2
+
+-- 円柱の表面積を高さと半径から求める関数。
+cylinder :: Double -> Double -> Double
+cylinder r h =
+    let sideArea = 2 * pi * r * h
+        topArea = pi * r ^ 2
+    in sideArea + 2 * topArea
+
+-- 体重と身長のタプルのリストからBMIのリストを返す
+calcBmis :: [ (Double, Double) ] -> [Double]
+calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2 ] 
+
+-- 体重と身長のタプルのリストから肥満なひとのBMIのリストを返す
+calcBmisAndFilterOnlyFat :: [ (Double, Double) ] -> [Double]
+calcBmisAndFilterOnlyFat xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi > 25.0 ] 
