@@ -143,3 +143,26 @@ calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2 ]
 -- 体重と身長のタプルのリストから肥満なひとのBMIのリストを返す
 calcBmisAndFilterOnlyFat :: [ (Double, Double) ] -> [Double]
 calcBmisAndFilterOnlyFat xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi > 25.0 ] 
+
+-- case式はパターンマッチと交換可能
+head1' :: [a] -> a
+head1' [] = error "No head for empty lists!"
+head1' (x:_) = x
+
+head2' :: [a] -> a
+head2' xs = case xs of [] -> error "No head for empty lists!"
+                       (x:_) -> x
+
+
+describeList :: [a] -> String
+describeList ls = "The list is "
+                  ++ case ls of [] -> "empty."
+                                [x] -> "a singleton list."
+                                xs -> "a longer list."
+
+describeList2 :: [a] -> String
+describeList2 ls = "The list is " ++ what ls
+    where what [] = "empty."
+          what [x] = "a singleton list."
+          what xs = "a longer list."
+
