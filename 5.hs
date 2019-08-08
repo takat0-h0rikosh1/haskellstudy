@@ -52,3 +52,21 @@ flip'' f y x = f x y
 -- flip'' zip [1,2,3,4,5] "hello"
 -- zipWith div [2,2..] [10,8,6,4,2]
 -- zipWith (flip'' div) [2,2..] [10,8,6,4,2]
+
+-- ex). 10万以下の数のうち3829で割り切れる最大の数を探す。
+largestDivisible :: Integer
+largestDivisible = head (filter p [100000,99999..])
+    where p x = x `mod` 3829 == 0
+
+-- コラッツ列を求める
+chain :: Integer -> [Integer]
+chain 1 = [1]
+chain n
+    | even n = n : chain (n `div` 2)
+    | odd n = n : chain (n * 3 + 1)
+
+-- 実際に問題に答える関数 numLongChains を書く。
+numLongChains :: Int
+numLongChains = length (filter isLong (map chain [1..100]))
+    where isLong xs = length xs > 15
+
