@@ -70,3 +70,10 @@ numLongChains :: Int
 numLongChains = length (filter isLong (map chain [1..100]))
     where isLong xs = length xs > 15
 
+-- ラムダ式を使って書いた numLongChains
+numLongChains' :: Int
+numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100])
+
+-- ラムダ式とカリー化で表した flip 関数
+flip' :: (a -> b -> c) -> b -> a -> c
+flip' f = \x y -> f y x
