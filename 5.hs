@@ -72,8 +72,16 @@ numLongChains = length (filter isLong (map chain [1..100]))
 
 -- ラムダ式を使って書いた numLongChains
 numLongChains' :: Int
-numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100])
+numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))
 
 -- ラムダ式とカリー化で表した flip 関数
-flip' :: (a -> b -> c) -> b -> a -> c
-flip' f = \x y -> f y x
+flipWithLambda :: (a -> b -> c) -> b -> a -> c
+flipWithLambda f = \x y -> f y x
+
+-- foldl で畳み込み
+sum' :: (Num a) => [a] -> a
+sum' xs = foldl (\acc x -> acc + x) 0 xs
+
+sum'' :: (Num a) => [a] -> a
+sum'' = foldl (+) 0
+
