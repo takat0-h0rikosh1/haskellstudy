@@ -109,7 +109,7 @@ product' = foldl (*) 1
 
 -- 畳み込みを利用した filter の実装
 filter' :: (a -> Bool) -> [a] -> [a]
-filter' p = folder (\x acc -> if p x then x : acc else acc) []
+filter' p = foldr (\x acc -> if p x then x : acc else acc) []
 
 -- 畳み込みを利用した last の実装
 last' :: [a] -> a
