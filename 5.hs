@@ -81,7 +81,36 @@ flipWithLambda f = \x y -> f y x
 -- foldl で畳み込み
 sum' :: (Num a) => [a] -> a
 sum' xs = foldl (\acc x -> acc + x) 0 xs
-
+-- カリー化されていることを応用してもっと簡潔に
 sum'' :: (Num a) => [a] -> a
 sum'' = foldl (+) 0
 
+-- foldrを利用してmap'を作成する
+map' :: (a -> b) -> [a] -> [b]
+map' f xs = foldr (\x acc -> f x : acc) [] xs
+
+-- elem の実装
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' y ys = foldr (\x acc -> if x == y then True else acc) False ys
+
+-- foldl1 を使って maximum を実装する
+maximum' :: (Ord a) => [a] -> a
+maximum' = foldl1 max
+
+-- 畳み込を利用した reverse の実装
+reverse1 :: [a] -> [a]
+reverse1 = foldl (\acc x -> x : acc) []
+reverse2 :: [a] -> [a]
+reverse2 = foldl (flip (:)) []
+
+-- 畳み込みを利用した product の実装
+product' :: (Num a) => [a] -> a
+product' = foldl (*) 1
+
+-- 畳み込みを利用した filter の実装
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' p = folder (\x acc -> if p x then x : acc else acc) []
+
+-- 畳み込みを利用した last の実装
+last' :: [a] -> a
+last' = foldl1 (\_ x -> x)
