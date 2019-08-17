@@ -114,3 +114,7 @@ filter' p = foldr (\x acc -> if p x then x : acc else acc) []
 -- 畳み込みを利用した last の実装
 last' :: [a] -> a
 last' = foldl1 (\_ x -> x)
+
+-- 無限リストの畳み込み
+and' ::   [Bool] -> Bool
+and' xs = foldr (&&) True xs
