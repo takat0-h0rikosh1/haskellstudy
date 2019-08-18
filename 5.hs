@@ -118,3 +118,7 @@ last' = foldl1 (\_ x -> x)
 -- 無限リストの畳み込み
 and' ::   [Bool] -> Bool
 and' xs = foldr (&&) True xs
+
+-- 「自然数の平方根を小さいものから足したとき、1000を超えるのは何個目か？」
+sqrtSums :: Int
+sqrtSums = length (takeWhile (< 1000) (scanl1 (+) (map sqrt [1..]))) + 1
