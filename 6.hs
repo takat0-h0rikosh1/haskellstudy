@@ -45,3 +45,26 @@ phoneBook = Map.fromList $
    ,("wendy", "939-2928")
    ,("penny", "853-2492")
    ]
+
+-- 電話番号を Int のリストに変換する関数
+
+string2digits :: String -> [Int]
+string2digits = map digitToInt . filter isDigit
+
+phoneBook' =
+   [("betty", "555-2938")
+   ,("bonnie", "452-2928")
+   ,("patsy", "493-2928")
+   ,("patsy", "123-2928")
+   ,("patsy", "234-2928")
+   ,("lucille", "205-2928")
+   ,("wendy", "939-2928")
+   ,("penny", "853-2492")
+   ]
+
+phoneBookToMap :: (Ord k) => [(k, String)] -> Map.Map k String
+phoneBookToMap xs = Map.fromListWith add xs
+    where add number1 number2 = number1 ++ ", " ++ number2
+
+phoneBookToMap' :: (Ord k) => [(k, a)] -> Map.Map k [a]
+phoneBookToMap' xs = Map.fromListWith (++) $ map (\(k,v) -> (k, [v])) xs
